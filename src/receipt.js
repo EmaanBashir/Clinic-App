@@ -55,7 +55,7 @@ function saveData() {
     });
 }
 
-
+ 
 //Print the Receipt
 function printData() {
 
@@ -98,7 +98,6 @@ function printData() {
     // };
 
 
-
     const electron = require('electron');
     const BrowserWindow = electron.remote.BrowserWindow;
     const path = require('path');
@@ -125,14 +124,16 @@ function printData() {
         }
     });
 
+    
+  
     win.loadURL(path.join(__dirname, 'extra.html'));
 
-    win.webContents.on('did-finish-load', () => {
-        win.webContents.print(options, (success, failureReason) => {
-            if (!success) console.log(failureReason);
-            console.log('Print Initiated');
-        });
-    });
+    // win.webContents.on('did-finish-load', () => {
+    //     win.webContents.print(options, (success, failureReason) => {
+    //         if (!success) console.log(failureReason);
+    //         console.log('Print Initiated');
+    //     });
+    // });
 
 
 
