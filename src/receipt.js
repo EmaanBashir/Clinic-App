@@ -1,3 +1,5 @@
+
+
 //Save receipt data
 function saveData() {
 
@@ -27,9 +29,9 @@ function saveData() {
                     console.log(err.stack);
                     return;
                 }
-                
+
             });
-        }else{
+        } else {
             query = `INSERT INTO Patients (id, name, age, gender, address, phone) VALUES ("${patientId}", "${name}", "${age}", "${gender}", "${address}", "${phone}");`
 
             connection.query(query, (err, rows, fields) => {
@@ -41,7 +43,7 @@ function saveData() {
             });
         }
     });
-    
+
     query = `INSERT INTO Consultations (patientId, consultantId, fee) VALUES ("${patientId}", "${consultantId}", "${fee}");`
 
     connection.query(query, (err, rows, fields) => {
@@ -78,11 +80,63 @@ function printData() {
     // tableRow.addCell("Material").setStyleAttributes("text-align:left; border:thin solid black;");
     // tableRow.addCell("76.00").setStyleAttributes("text-align:right; border:thin solid black;");
 
-console.log("hiiii");
+    console.log("hiiii");
+
+    // var easyinvoice = require('easyinvoice');
+
+    // // You are able to provide your own html template
+    // var html = '<p>Hello world! This is invoice number %number%</p>';
+
+    // const data = {
+    //     customize: {
+    //         // btoa === base64 encode
+    //         template: btoa(html) // Your template must be base64 encoded
+    //     },
+    //     information: {
+    //         number: '2022.0001'
+    //     }
+    // };
 
 
 
-// window.print();
+    const electron = require('electron');
+    const BrowserWindow = electron.remote.BrowserWindow;
+    const path = require('path');
+    var options = {
+        silent: false,
+        printBackground: true,
+        color: false,
+        margin: {
+            marginType: 'printableArea'
+        },
+        landscape: false,
+        pagesPerSheet: 1,
+        collate: false,
+        copies: 1,
+        header: 'Header of the Page',
+        footer: 'Footer of the Page'
+    }
+
+    // Defining a new BrowserWindow Instance
+    let win = new BrowserWindow({
+        show: false,
+        webPreferences: {
+            nodeIntegration: true
+        }
+    });
+
+    win.loadURL(path.join(__dirname, 'extra.html'));
+
+    win.webContents.on('did-finish-load', () => {
+        win.webContents.print(options, (success, failureReason) => {
+            if (!success) console.log(failureReason);
+            console.log('Print Initiated');
+        });
+    });
+
+
+
+    // window.print();
 
     //let WinPrint = window.open('', '', 'left=0,top=0,width=800,height=900,toolbar=0,scrollbars=0,status=0');
     //WinPrint.document.write(document.querySelector(".container").innerHTML);

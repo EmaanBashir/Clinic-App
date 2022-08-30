@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>hello</h1>
+    <h2 id="nn">name</h2>
+    <script>
+
+        let mysql = require('mysql');
+
+        let connection = mysql.createConnection({
+            host: 'localhost',
+            user: 'root',
+            password: null,
+            database: 'eyemed_db'
+        });
+
+        connection.connect((err) => {
+            if (err) {
+                console.log(err.stack);
+            }
+            console.log("Connection successful");
+        });
+
+        let query = `SELECT max(id) as id FROM Patients`;
+
+        connection.query(query, (err, rows, fields) => {
+            if (err) {
+                console.log("An error ocurred performing the query.");
+                console.log(err.stack);
+                return;
+            }
+            document.querySelector('#nn').innerHTML = "errerer";
+        });
+
+        document.querySelector('#nn').innerHTML = "sdfsdfdf";
+    </script>
+</body>
+
+</html>

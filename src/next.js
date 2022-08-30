@@ -1,7 +1,4 @@
 
-
-
-
 let query = `SELECT max(id) as id FROM Patients`;
 let idInput = document.querySelector("#patientId");
 let id;
