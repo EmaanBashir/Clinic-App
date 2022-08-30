@@ -52,6 +52,7 @@ function saveData() {
             console.log(err.stack);
             return;
         }
+        printData();
     });
 }
 
@@ -149,11 +150,13 @@ function printData() {
 
 }
 
+
 //Save and print receipt
 document.querySelector("#receipt").addEventListener('submit', (e) => {
     e.preventDefault();
     saveData();
-    printData();
 
 });
+
+module.exports = {Student: "eerer"};
 

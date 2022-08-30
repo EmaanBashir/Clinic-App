@@ -10,37 +10,96 @@
 
 <body>
     <h1>hello</h1>
-    <h2 id="nn">name</h2>
+    <h2>MR No.</h2>
+    <h3 id="mrNo"></h3>
+    <h2>Patient Name</h2>
+    <h3 id="name"></h3>
+    <h2>Age</h2>
+    <h3 id="age"></h3>
+    <h2>Address</h2>
+    <h3 id="address"></h3>
+    <h2>Phone</h2>
+    <h3 id="phone"></h3>
+    <h2>Consultant</h2>
+    <h3 id="consultant"></h3>
+    <h2>Gender</h2>
+    <h3 id="gender"></h3>
+    <h2>Date</h2>
+    <h3 id="date"></h3>
+    <h2>Fee</h2>
+    <h3 id="fee"></h3>
     <script>
+        
+        let mysq = require('mysql');
 
-let mysq = require('mysql');
+        let connectio = mysq.createConnection({
+            host: 'localhost',
+            user: 'root',
+            password: null,
+            database: 'eyemed_db'
+        });
 
-let connectio = mysq.createConnection({
-    host: 'localhost',
-    user: 'root',
-    password: null,
-    database: 'eyemed_db'
-});
+        connectio.connect((err) => {
+            if (err) {
+                console.log(err.stack);
+            }
+            console.log("Connection successful");
+        });
 
-connectio.connect((err) => {
-    if (err) {
-        console.log(err.stack);
-    }
-    console.log("Connection successful");
-});
+        let mrNo;
 
-let quer = `SELECT max(id) as id FROM Patients`;
+        
+        let quer = `SELECT patientId, consultantId, fee, date FROM Consultations  
+ORDER BY consultationId DESC LIMIT 1; `;
 
 
-    connectio.query(quer, (err, rows, fields) => {
-        if (err) {
-            console.log("An error ocurred performing the query.");
-            console.log(err.stack);
-            return;
-        }
-        document.querySelector("#nn").innerHTML = rows[0].id;
-        window.print();
-    });
+        connectio.query(quer, (err, rows, fields) => {
+            if (err) {
+                console.log("An error ocurred performing the query.");
+                console.log(err.stack);
+                return;
+            }
+            
+            mrNo = rows[0].patientId;
+            document.querySelector("#mrNo").innerHTML = mrNo;
+            document.querySelector("#date").innerHTML = rows[0].date;
+            document.querySelector("#fee").innerHTML = rows[0].fee;
+            switch(rows[0].consultantId){
+                case 0: 
+                document.querySelector("#consultant").innerHTML = "Dr. Hamid Bashir";
+                    break;
+                case 1:
+                document.querySelector("#consultant").innerHTML = "Dr. Naeem Altaf";
+                    break;
+            }
+            
+            quer = `SELECT * FROM Patients WHERE id = "${mrNo}"`;
+
+
+            connectio.query(quer, (err, rows, fields) => {
+                if (err) {
+                    console.log("An error ocurred performing the query.");
+                    console.log(err.stack);
+                    return;
+                }
+                document.querySelector("#age").innerHTML = rows[0].age;
+                document.querySelector("#address").innerHTML = rows[0].address;
+                document.querySelector("#phone").innerHTML = rows[0].phone;
+                switch(rows[0].gender){
+                    case 'm':
+                    document.querySelector("#gender").innerHTML = 'male';
+                        break;
+                    case 'f':
+                    document.querySelector("#gender").innerHTML = 'female';
+                        break;
+                }   
+                document.querySelector("#name").innerHTML = rows[0].name;
+                
+                window.print();
+
+            });
+
+        });
 
 
 
