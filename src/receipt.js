@@ -60,44 +60,7 @@ function saveData() {
 //Print the Receipt
 function printData() {
 
-    // console.log("hello");
-    // // Add a table
-    // var mytable = repDocObj.addTable("MyTable");
-    // var tableRow;
-
-    // // Row 1: the header of the table, columns titles
-    // var header = mytable.getHeader();
-    // tableRow = header.addRow();
-    // tableRow.addCell("Description").setStyleAttributes("text-align:left; font-weight:bold; border:thin solid black;");
-    // tableRow.addCell("Amount").setStyleAttributes("text-align:left; font-weight:bold; border:thin solid black;");
-
-    // // Row 2: first data row of the table
-    // tableRow = mytable.addRow();
-    // tableRow.addCell("Workshop").setStyleAttributes("text-align:left; border:thin solid black;");
-    // tableRow.addCell("2'600.00").setStyleAttributes("text-align:right; border:thin solid black;");
-
-    // // Row 3: second data row of the table
-    // tableRow = mytable.addRow();
-    // tableRow.addCell("Material").setStyleAttributes("text-align:left; border:thin solid black;");
-    // tableRow.addCell("76.00").setStyleAttributes("text-align:right; border:thin solid black;");
-
-    console.log("hiiii");
-
-    // var easyinvoice = require('easyinvoice');
-
-    // // You are able to provide your own html template
-    // var html = '<p>Hello world! This is invoice number %number%</p>';
-
-    // const data = {
-    //     customize: {
-    //         // btoa === base64 encode
-    //         template: btoa(html) // Your template must be base64 encoded
-    //     },
-    //     information: {
-    //         number: '2022.0001'
-    //     }
-    // };
-
+    
 
     const electron = require('electron');
     const BrowserWindow = electron.remote.BrowserWindow;
@@ -127,33 +90,16 @@ function printData() {
 
     
   
-    win.loadURL(path.join(__dirname, 'extra.html'));
-
-    // win.webContents.on('did-finish-load', () => {
-    //     win.webContents.print(options, (success, failureReason) => {
-    //         if (!success) console.log(failureReason);
-    //         console.log('Print Initiated');
-    //     });
-    // });
+    win.loadURL(path.join(__dirname, 'receipt.html'));
 
 
-
-    // window.print();
-
-    //let WinPrint = window.open('', '', 'left=0,top=0,width=800,height=900,toolbar=0,scrollbars=0,status=0');
-    //WinPrint.document.write(document.querySelector(".container").innerHTML);
-    // WinPrint.document.close();
-    // WinPrint.focus();
-    // WinPrint.print();
-    // WinPrint.close();
-    console.log("whyyyyy");
 
 }
 
 
 //Save and print receipt
 document.querySelector("#receipt").addEventListener('submit', (e) => {
-    e.preventDefault();
+
     saveData();
 
 });

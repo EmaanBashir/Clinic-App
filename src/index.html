@@ -3,35 +3,36 @@
 
 <head>
   <meta charset="utf-8">
-  <title>Eye Med</title>
+  <title>EyeMed Clinic</title>
   <link rel="stylesheet" type="text/css" href="../node_modules/bootstrap/dist/css/bootstrap.min.css">
 </head>
 
 <body>
 
   <div class="container">
-    <form class="row g-3" id="receipt">
+    <form class="row g-3 mt-5" id="receipt">
       <div class="col-md-6">
         <label for="patientId" class="form-label">MR No. </label>
         <input type="number" class="form-control" id="patientId" min="1" required disabled>
       </div>
-      <div class="col-12">
+      <div class="col-md-6">
         <div class="form-check">
+          <br class = "d-none d-md-block"><br class = "d-none d-md-block">
           <input class="form-check-input" type="checkbox" id="old">
           <label class="form-check-label" for="old">
             Old patient
           </label>
         </div>
       </div>
-      <div class="col-md-6">
+      <div class="col-md-4">
         <label for="patientName" class="form-label">Name</label>
         <input type="text" class="form-control" id="patientName" required>
       </div>
-      <div class="col-12">
+      <div class="col-md-4">
         <label for="patientAge" class="form-label">Age</label>
         <input type="number" step="0.1" class="form-control" id="patientAge" required>
       </div>
-      <div class="col-12">
+      <div class="col-md-4">
         <label for="patientGender" class="form-label">Gender</label>
         <select class="form-control" id="patientGender" required>
           <option value="m">Male</option>
@@ -42,18 +43,18 @@
         <label for="patientPhone" class="form-label">Phone</label>
         <input type="number" class="form-control" id="patientPhone">
       </div>
-      <div class="col-md-4">
+      <div class="col-md-6">
         <label for="patientAddress" class="form-label">Address</label>
         <input type="text" class="form-control" id="patientAddress">
       </div>
-      <div class="col-md-2">
+      <div class="col-md-6">
         <label for="consultant" class="form-label">Consultant</label>
         <select id="consultant" class="form-select" required>
           <option value="0">Dr. Hamid Bashir</option>
           <option value="1">Dr. Naeem Altaf</option>
         </select>
       </div>
-      <div class="col-md-4">
+      <div class="col-md-6">
         <label for="fee" class="form-label">Consultation fee</label>
         <input type="number" class="form-control" id="fee" required>
       </div>
@@ -61,6 +62,7 @@
         <button type="submit" class="btn btn-primary">Save & Print</button>
       </div>
     </form>
+    <a href="./list.html">Patients List</a>
   </div>
 
   <script>
@@ -82,14 +84,7 @@
     });
 
   </script> 
-  <!-- Extraaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa -->
-  <script src="./extra.js">
 
-    
-
-
-  </script>
-  <!-- Till hereeeeeeeeeeeeeeeeeeeeeeeeeeeee -->
   <script src="./receipt.js"></script>
   <script src="./next.js"></script>
 

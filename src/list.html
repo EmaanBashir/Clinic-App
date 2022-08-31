@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>History</title>
+    <link rel="stylesheet" type="text/css" href="../node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <style>
+        th,
+        td {
+            min-width: 150px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <a href="./index.html">back</a>
+        <h2 class="text-center mt-4 mb-3">Patients List</h2>
+        <div class="table-responsive-xxl">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>MR No.</th>
+                        <th>Name</th>
+                        <th>Age</th>
+                        <th>Gender</th>
+                        <th>Date</th>
+                        <th>Phone</th>
+                        <th>Address</th>
+                        <th>Consultant</th>
+                        <th>Consultation Fee</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script>
+
+        let sql = require('mysql');
+        let gender, consultant;
+
+        let conn = sql.createConnection({
+            host: 'localhost',
+            user: 'root',
+            password: null,
+            database: 'eyemed_db'
+        });
+
+        conn.connect((err) => {
+            if (err) {
+                console.log(err.stack);
+            }
+            console.log("Connection successful");
+        });
+
+        let q = `SELECT * FROM Consultations INNER JOIN Patients ON patientId = id ORDER BY consultationId;`;
+
+        conn.query(q, (err, rows, fields) => {
+            if (err) {
+                console.log("An error ocurred performing the query.");
+                console.log(err.stack);
+                return;
+            }
+
+            for (let i = 0; i < rows.length; i++) {
+                switch (rows[i].gender) {
+                    case 'm':
+                        gender = "male";
+                        break;
+                    case 'f':
+                        gender = "female";
+                        break;
+                    default:
+                        gender = "-";
+                }
+                switch (rows[i].consultantId) {
+                    case 0:
+                        consultant = "Dr. Hamid Bashir";
+                        break;
+                    case 1:
+                        consultant = "Dr. Naeem Altaf";
+                        break;
+                }
+                document.querySelector('tbody').innerHTML += `
+                        <tr>
+                            <th scope="row">${rows[i].patientId}</th>
+                            <td>${rows[i].name}</td>
+                            <td>${rows[i].age ? rows[i].age : '-'}</td>
+                            <td>${gender}</td>
+                            <td>${rows[i].date.toDateString()}</td>
+                            <td>${rows[i].phone ? rows[i].phone : '-'}</td>
+                            <td>${rows[i].address ? rows[i].address : '-'}</td>
+                            <td>${consultant}</td>
+                            <td>${rows[i].fee}</td>
+                        </tr>`;
+            }
+        });
+    </script>
+</body>
+
+</html>
