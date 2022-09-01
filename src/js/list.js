@@ -15,18 +15,11 @@ conn.connect((err) => {
     console.log("Connection successful");
 });
 
-let loadData = (consultantId) => {
-    let currentDate = new Date();
-    let currentMonth = currentDate.getMonth();
-    let currentYear = currentDate.getFullYear();
-    let anotherYear = currentMonth == 0 ? currentYear - 1 : currentYear;
-    let months = ["January", "February", "March", "April", "May", "June",
-        "July", "August", "September", "October", "November", "December"];
-    document.querySelector("#currentMonth").innerHTML = months[currentMonth];
-    document.querySelector("#previousMonth").innerHTML = months[(currentMonth + 11) % 12];
+let loadData = (consultantId, month) => {
+    let selectedMonth = new Date(month).getMonth();
+    let selectedYear = new Date(month).getFullYear();
     document.querySelector('#tbody1').innerHTML = "";
-    document.querySelector('#tbody2').innerHTML = "";
-    let q = `SELECT * FROM Consultations INNER JOIN Patients ON patientId = id WHERE consultantId = "${consultantId}" AND YEAR(Consultations.date) = "${currentYear}" AND MONTH(Consultations.date) = "${currentMonth + 1}" ORDER BY consultationId DESC;`;
+    let q = `SELECT * FROM Consultations INNER JOIN Patients ON patientId = id WHERE consultantId = "${consultantId}" AND YEAR(Consultations.date) = "${selectedYear}" AND MONTH(Consultations.date) = "${selectedMonth + 1}" ORDER BY consultationId DESC;`;
 
     conn.query(q, (err, rows, fields) => {
         if (err) {
@@ -62,50 +55,26 @@ let loadData = (consultantId) => {
         document.querySelector("#total1").innerHTML = totalFee;
     });
 
-    let totalFee2
-    q = `SELECT * FROM Consultations INNER JOIN Patients ON patientId = id WHERE consultantId = "${consultantId}" AND (YEAR(Consultations.date) = "${currentYear}" OR YEAR(Consultations.date) = "${anotherYear}") AND MONTH(Consultations.date) = "${currentMonth}" ORDER BY consultationId DESC;`;
-    conn.query(q, (err, rows, fields) => {
-        if (err) {
-            console.log("An error ocurred performing the query.");
-            console.log(err.stack);
-            return;
-        }
-        totalFee2 = 0;
-        for (let i = 0; i < rows.length; i++) {
-            switch (rows[i].gender) {
-                case 'm':
-                    gender = "male";
-                    break;
-                case 'f':
-                    gender = "female";
-                    break;
-                default:
-                    gender = "-";
-            }
-
-            totalFee2 += rows[i].fee;
-            document.querySelector('#tbody2').innerHTML += `
-                        <tr>
-                            <th scope="row">${rows[i].patientId}</th>
-                            <td>${rows[i].name}</td>
-                            <td>${rows[i].age ? rows[i].age : '-'}</td>
-                            <td>${gender}</td>
-                            <td>${rows[i].date.toDateString()}</td>
-                            <td>${rows[i].phone ? rows[i].phone : '-'}</td>
-                            <td>${rows[i].address ? rows[i].address : '-'}</td>
-                            <td>${rows[i].fee}</td>
-                        </tr>`;
-        }
-        document.querySelector("#total2").innerHTML = totalFee2;
-    });
-}
+};
 
 let consultantSelect = document.querySelector("#consultant");
+let monthSelect = document.querySelector("#month");
 consultantSelect.addEventListener('change', () => {
-    loadData(consultantSelect.value);
+    loadData(consultantSelect.value, monthSelect.value);
 });
 
-loadData(0);
+monthSelect.addEventListener('change', () => {
+    loadData(consultantSelect.value, monthSelect.value);
+});
+
+let currentDate = new Date();
+let currentMonth = currentDate.getMonth();
+let currentYear = currentDate.getFullYear();
+let dash = currentMonth < 10 ? "-0" : "-";
+let reqMonth = String(currentYear + dash + (currentMonth + 1));
+monthSelect.value = reqMonth;
+
+loadData(0, reqMonth);
 let backBtn = document.querySelector("#backBtn");
 let printBtn = document.querySelector("#printBtn");
 let containerLg = document.querySelector(".container-lg");

@@ -26,6 +26,8 @@ const createWindow = () => {
 
   // and load the index.html of the app.
   mainWindow.loadURL(`file://${__dirname}/login.html`);
+  console.log(__dirname);
+  console.log(__filename);
 
   // Open the DevTools.
   mainWindow.webContents.openDevTools();
