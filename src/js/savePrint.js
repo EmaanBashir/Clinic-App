@@ -56,11 +56,9 @@ function saveData() {
     });
 }
 
- 
+
 //Print the Receipt
 function printData() {
-
-    
 
     const electron = require('electron');
     const BrowserWindow = electron.remote.BrowserWindow;
@@ -81,6 +79,7 @@ function printData() {
     }
 
     // Defining a new BrowserWindow Instance
+    //Here show = false. So the page will not be displayed. It will just be opened in the backend
     let win = new BrowserWindow({
         show: false,
         webPreferences: {
@@ -88,21 +87,14 @@ function printData() {
         }
     });
 
-    
-  
+    //load the page for receipt
     win.loadURL(path.join(__dirname, 'receipt.html'));
-
-
-
 }
 
 
 //Save and print receipt
 document.querySelector("#receipt").addEventListener('submit', (e) => {
-
     saveData();
-
 });
 
-module.exports = {Student: "eerer"};
 

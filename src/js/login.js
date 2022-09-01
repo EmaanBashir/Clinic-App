@@ -1,3 +1,4 @@
+//login function
 document.querySelector("#login").addEventListener('click', (e) => {
     e.preventDefault();
     let usernameField = document.querySelector("#username");

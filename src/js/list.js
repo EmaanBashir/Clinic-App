@@ -1,5 +1,5 @@
+//Establish MySQL connection
 let sql = require('mysql');
-let gender, totalFee;
 
 let conn = sql.createConnection({
     host: 'localhost',
@@ -15,6 +15,8 @@ conn.connect((err) => {
     console.log("Connection successful");
 });
 
+let gender, totalFee;
+//Function to load data from db
 let loadData = (consultantId, month) => {
     let selectedMonth = new Date(month).getMonth();
     let selectedYear = new Date(month).getFullYear();
@@ -57,28 +59,31 @@ let loadData = (consultantId, month) => {
 
 };
 
+//Event listener for consultant change
 let consultantSelect = document.querySelector("#consultant");
 let monthSelect = document.querySelector("#month");
 consultantSelect.addEventListener('change', () => {
     loadData(consultantSelect.value, monthSelect.value);
 });
 
+//Event listener for month change
 monthSelect.addEventListener('change', () => {
     loadData(consultantSelect.value, monthSelect.value);
 });
 
+//Load data when the page is loaded
 let currentDate = new Date();
 let currentMonth = currentDate.getMonth();
 let currentYear = currentDate.getFullYear();
 let dash = currentMonth < 10 ? "-0" : "-";
 let reqMonth = String(currentYear + dash + (currentMonth + 1));
 monthSelect.value = reqMonth;
-
 loadData(0, reqMonth);
 let backBtn = document.querySelector("#backBtn");
 let printBtn = document.querySelector("#printBtn");
 let containerLg = document.querySelector(".container-lg");
 
+//Event Listener for print
 printBtn.addEventListener('click', () => {
     backBtn.style.display = "none";
     printBtn.style.display = "none";

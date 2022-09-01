@@ -1,3 +1,4 @@
+//Establish MySQL Connection
 let mysq = require('mysql');
 
         let connectio = mysq.createConnection({
@@ -14,8 +15,8 @@ let mysq = require('mysql');
             console.log("Connection successful");
         });
 
+        //Get the latest consultation from the db to print it
         let mrNo;
-
 
         let quer = `SELECT patientId, consultantId, fee, date FROM Consultations  
 ORDER BY consultationId DESC LIMIT 1; `;
@@ -50,8 +51,8 @@ ORDER BY consultationId DESC LIMIT 1; `;
                     break;
             }
 
+            //Get the details of the latest patient
             quer = `SELECT * FROM Patients WHERE id = "${mrNo}"`;
-
 
             connectio.query(quer, (err, rows, fields) => {
                 if (err) {
@@ -81,6 +82,7 @@ ORDER BY consultationId DESC LIMIT 1; `;
                 document.querySelector("#name").innerHTML = rows[0].name;
                 document.querySelector("#name1").innerHTML = rows[0].name;
 
+                //print the receipt
                 window.print();
 
             });

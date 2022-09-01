@@ -1,4 +1,7 @@
 import { app, BrowserWindow } from 'electron';
+//These two lines allow the image to be displayed in the packaged app
+import { addBypassChecker } from 'electron-compile';
+addBypassChecker((filePath) => { return filePath.indexOf(app.getAppPath()) === -1 && (/.jfif/.test(filePath)); })
 
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
 if (require('electron-squirrel-startup')) { // eslint-disable-line global-require
@@ -17,7 +20,7 @@ const createWindow = () => {
     show: false,
     webPreferences: {
       nodeIntegration: true,
-      devTools: true,
+      devTools: false,
     }
   });
 
@@ -26,8 +29,6 @@ const createWindow = () => {
 
   // and load the index.html of the app.
   mainWindow.loadURL(`file://${__dirname}/login.html`);
-  console.log(__dirname);
-  console.log(__filename);
 
   // Open the DevTools.
   mainWindow.webContents.openDevTools();
