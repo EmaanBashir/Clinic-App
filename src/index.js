@@ -12,16 +12,20 @@ let mainWindow;
 const createWindow = () => {
   // Create the browser window.
   mainWindow = new BrowserWindow({
-    width: 1300, 
+    width: 1300,
     height: 850,
+    show: false,
     webPreferences: {
       nodeIntegration: true,
       devTools: true,
-  }
+    }
   });
 
+  mainWindow.maximize();
+  mainWindow.show();
+
   // and load the index.html of the app.
-  mainWindow.loadURL(`file://${__dirname}/index.html`);
+  mainWindow.loadURL(`file://${__dirname}/login.html`);
 
   // Open the DevTools.
   mainWindow.webContents.openDevTools();

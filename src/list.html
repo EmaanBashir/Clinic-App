@@ -5,23 +5,43 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>History</title>
+    <title>EyeMed Clinic</title>
     <link rel="stylesheet" type="text/css" href="../node_modules/bootstrap/dist/css/bootstrap.min.css">
     <style>
-        th,
-        td {
-            min-width: 150px;
+        table {
+            width: 100%;
+        }
+
+        .img {
+            background-size: cover;
+            background-position: center center;
         }
     </style>
 </head>
 
-<body>
-    <div class="container">
-        <a href="./index.html">back</a>
+<body class="img js-fullheight" style="background-image: url(images/bg.jfif);">
+    <div class="container-lg card mt-5 p-5">
+        <div class="text-start"><a id="backBtn" href="./index.html" class="btn">BACK</a></div>
+
         <h2 class="text-center mt-4 mb-3">Patients List</h2>
+
+        <div class="row">
+            <div class="col-lg-4 col-md-6 col-10">
+                <label for="consultant" class="form-label"><strong>Consultant</strong></label>
+                <select id="consultant" class="form-select" required>
+                    <option value="0">Dr. Hamid Bashir</option>
+                    <option value="1">Dr. Naeem Altaf</option>
+                </select>
+            </div>
+            <div class="col-lg-8 col-md-6 col-2 text-end">
+                <br>
+                <a class="btn btn-secondary" id="printBtn">PRINT</a>
+            </div>
+        </div>
         <div class="table-responsive-xxl">
+            <h4 id="currentMonth" class="mt-3"></h4>
             <table class="table table-hover">
-                <thead>
+                <thead id="thead1">
                     <tr>
                         <th>MR No.</th>
                         <th>Name</th>
@@ -30,79 +50,39 @@
                         <th>Date</th>
                         <th>Phone</th>
                         <th>Address</th>
-                        <th>Consultant</th>
                         <th>Consultation Fee</th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody id="tbody1">
 
                 </tbody>
             </table>
+            <h6>Total Fee: &nbsp <span id="total1"></span></h6>
+
+            <h4 id="previousMonth" class="mt-3"></h4>
+            <table class="table table-hover">
+                <thead id="thead2">
+                    <tr>
+                        <th>MR No.</th>
+                        <th>Name</th>
+                        <th>Age</th>
+                        <th>Gender</th>
+                        <th>Date</th>
+                        <th>Phone</th>
+                        <th>Address</th>
+                        <th>Consultation Fee</th>
+                    </tr>
+                </thead>
+                <tbody id="tbody2">
+
+                </tbody>
+            </table>
+            <h6>Total Fee: &nbsp <span id="total2"></span></h6>
         </div>
     </div>
 
-    <script>
-
-        let sql = require('mysql');
-        let gender, consultant;
-
-        let conn = sql.createConnection({
-            host: 'localhost',
-            user: 'root',
-            password: null,
-            database: 'eyemed_db'
-        });
-
-        conn.connect((err) => {
-            if (err) {
-                console.log(err.stack);
-            }
-            console.log("Connection successful");
-        });
-
-        let q = `SELECT * FROM Consultations INNER JOIN Patients ON patientId = id ORDER BY consultationId;`;
-
-        conn.query(q, (err, rows, fields) => {
-            if (err) {
-                console.log("An error ocurred performing the query.");
-                console.log(err.stack);
-                return;
-            }
-
-            for (let i = 0; i < rows.length; i++) {
-                switch (rows[i].gender) {
-                    case 'm':
-                        gender = "male";
-                        break;
-                    case 'f':
-                        gender = "female";
-                        break;
-                    default:
-                        gender = "-";
-                }
-                switch (rows[i].consultantId) {
-                    case 0:
-                        consultant = "Dr. Hamid Bashir";
-                        break;
-                    case 1:
-                        consultant = "Dr. Naeem Altaf";
-                        break;
-                }
-                document.querySelector('tbody').innerHTML += `
-                        <tr>
-                            <th scope="row">${rows[i].patientId}</th>
-                            <td>${rows[i].name}</td>
-                            <td>${rows[i].age ? rows[i].age : '-'}</td>
-                            <td>${gender}</td>
-                            <td>${rows[i].date.toDateString()}</td>
-                            <td>${rows[i].phone ? rows[i].phone : '-'}</td>
-                            <td>${rows[i].address ? rows[i].address : '-'}</td>
-                            <td>${consultant}</td>
-                            <td>${rows[i].fee}</td>
-                        </tr>`;
-            }
-        });
-    </script>
+    <script src="./js/list.js"></script>
+    <script>window.$ = window.jQuery = require('./js/jquery.min.js');</script>
 </body>
 
 </html>

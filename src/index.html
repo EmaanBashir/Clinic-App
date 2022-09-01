@@ -5,12 +5,22 @@
   <meta charset="utf-8">
   <title>EyeMed Clinic</title>
   <link rel="stylesheet" type="text/css" href="../node_modules/bootstrap/dist/css/bootstrap.min.css">
+
+<style>
+  .img {
+  background-size: cover;
+  background-position: center center; }
+  
+</style>
+  
 </head>
 
-<body>
+<body class="img js-fullheight" style="background-image: url(images/bg.jfif);">
 
-  <div class="container">
-    <form class="row g-3 mt-5" id="receipt">
+  <div class="container card mt-5 p-5">
+    <div class = "text-end"><a href="./login.html" class = "btn">SIGN OUT</a></div>
+    <h2 class="text-center">Payment Receipt</h2>
+    <form class="row g-3 mt-1" id="receipt">
       <div class="col-md-6">
         <label for="patientId" class="form-label">MR No. </label>
         <input type="number" class="form-control" id="patientId" min="1" required disabled>
@@ -34,7 +44,7 @@
       </div>
       <div class="col-md-4">
         <label for="patientGender" class="form-label">Gender</label>
-        <select class="form-control" id="patientGender" required>
+        <select class="form-select" id="patientGender" required>
           <option value="m">Male</option>
           <option value="f">Female</option>
         </select>
@@ -59,10 +69,10 @@
         <input type="number" class="form-control" id="fee" required>
       </div>
       <div class="col-12">
-        <button type="submit" class="btn btn-primary">Save & Print</button>
+        <button type="submit" class="btn btn-secondary">Save / Print</button>
       </div>
     </form>
-    <a href="./list.html">Patients List</a>
+    <div class = "text-start mt-1"><a href="./list.html" class = "btn">Patients List</a></div>
   </div>
 
   <script>
@@ -85,9 +95,9 @@
 
   </script> 
 
-  <script src="./receipt.js"></script>
-  <script src="./next.js"></script>
-
+  <script src="./js/savePrint.js"></script>
+  <script src="./js/next.js"></script>
+  <script>window.$ = window.jQuery = require('./js/jquery.min.js');</script>
 </body>
 
 </html>
