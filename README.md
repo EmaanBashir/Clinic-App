@@ -9,7 +9,7 @@ Coded in *Electron Forge*:
 - MySQL 
 
 ## How to run the Application
-Go t
+- Download the code
 - npm install
 
 ## How to create an electron application
@@ -30,8 +30,9 @@ If images are included, they will not appear in the packaged application. In ord
 - npm i --save electron-compile 
 - Paste the following two lines at the start of the index.js file <br><br>
 import { addBypassChecker } from 'electron-compile'; <br>
-addBypassChecker((filePath) => { return filePath.indexOf(app.getAppPath()) === -1 && (/.jpg/.test(filePath) || /.jfif/.test(filePath) || /.png/.test(filePath)); }) <br>
+addBypassChecker((filePath) => { return filePath.indexOf(app.getAppPath()) === -1 && (/.jpg/.test(filePath) || /.jfif/.test(filePath) || /.png/.test(filePath)); }) <br><br>
 (This statement is used if jpg, jfif and png image types are used. Replace these with the required image type) <br>
   
-  
+## How to run the application on client computer
+
 
