@@ -26,19 +26,17 @@ https://adityasridhar.com/posts/desktop-apps-with-html-css-javascript#:~:text=El
 - npm run package
 
 ## How to create an installer
-- npm run make
+- npm run make <br>
 
 If images are included, they will not appear in the packaged application. In order to make the images appear,
 - npm i --save electron-compile 
-- Paste the following two lines at the start of the index.js file
-
+- Paste the following two lines at the start of the index.js file <br>
 
 
 import { addBypassChecker } from 'electron-compile';
 
 
 addBypassChecker((filePath) => { return filePath.indexOf(app.getAppPath()) === -1 && (/.jpg/.test(filePath) || /.jfif/.test(filePath) || /.png/.test(filePath)); })
-
 
 
 (This statement is used if jpg, jfif and png image types are used. Replace these with the required image type)
