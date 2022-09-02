@@ -56,9 +56,9 @@ addBypassChecker((filePath) => { return filePath.indexOf(app.getAppPath()) === -
 ## Database structure
 **Database name:** eyemed_db <br>
 **Table:** Consultations <br>
-![image](https://user-images.githubusercontent.com/56760682/188235247-76c71dba-9567-4d15-9156-95ec5b7d5eff.png)
+![image](https://user-images.githubusercontent.com/56760682/188235247-76c71dba-9567-4d15-9156-95ec5b7d5eff.png) <br>
 **Table:** Patients <br>
-![image](https://user-images.githubusercontent.com/56760682/188235493-3cbe4cae-cca4-435b-8c6e-b9e3804d7451.png)
+![image](https://user-images.githubusercontent.com/56760682/188235493-3cbe4cae-cca4-435b-8c6e-b9e3804d7451.png) <br>
 **Table:** Users <br>
-![image](https://user-images.githubusercontent.com/56760682/188235536-cc828466-37de-4bd3-bb79-b61a7ae65524.png)
+![image](https://user-images.githubusercontent.com/56760682/188235536-cc828466-37de-4bd3-bb79-b61a7ae65524.png) <br>
 
