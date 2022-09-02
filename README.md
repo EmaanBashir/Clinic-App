@@ -15,7 +15,7 @@ Coded in *Electron Forge*:
 - Go to the folder containing src folder
 - npm install
 - Download XAMPP and start apache and mysql (If they dont start automatically)
-- Create db and required tables manually on localhost/phpmyadmin (If they dont exist already)
+- Create db and required tables manually on localhost/phpmyadmin (DB structure given at the end)
 - npm start
 
 ## How to create an electron application
@@ -50,15 +50,15 @@ addBypassChecker((filePath) => { return filePath.indexOf(app.getAppPath()) === -
 - Download XAMPP
 - Open XAMPP in admin mode
 - Check the boxes next to apache and mysql (This will start apache and mysql automatically, whenever the system boots.)
-- Create the db and required tables manually at localhost/phpmyadmin
+- Create the db and required tables manually at localhost/phpmyadmin (DB structure given at the end)
 - Run the application
 
 ## Database structure
-** Database name: ** eyemed_db <br>
-**Table: ** Consultations <br>
+**Database name:** eyemed_db <br>
+**Table:** Consultations <br>
 ![image](https://user-images.githubusercontent.com/56760682/188235247-76c71dba-9567-4d15-9156-95ec5b7d5eff.png)
-**Table: ** Patients <br>
+**Table:** Patients <br>
 ![image](https://user-images.githubusercontent.com/56760682/188235493-3cbe4cae-cca4-435b-8c6e-b9e3804d7451.png)
-**Table: ** Users <br>
+**Table:** Users <br>
 ![image](https://user-images.githubusercontent.com/56760682/188235536-cc828466-37de-4bd3-bb79-b61a7ae65524.png)
 
