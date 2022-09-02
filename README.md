@@ -28,7 +28,7 @@ https://adityasridhar.com/posts/desktop-apps-with-html-css-javascript#:~:text=El
 
 If images are included, they will not appear in the packaged application. In order to make the images appear,
 - npm i --save electron-compile 
-- Paste the following two lines at the start of the index.js file 
+- Paste the following two lines at the start of the index.js file <br>
 import { addBypassChecker } from 'electron-compile'; <br>
 addBypassChecker((filePath) => { return filePath.indexOf(app.getAppPath()) === -1 && (/.jpg/.test(filePath) || /.jfif/.test(filePath) || /.png/.test(filePath)); })
 <br>
