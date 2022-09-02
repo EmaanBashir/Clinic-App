@@ -1,6 +1,8 @@
 # Application for Clinic Reception
 A desktop application that generates and prints receipts and keeps record of patients in a clinic. 
-<br><br>
+
+
+
 Coded in *Electron Forge*: 
 - Html 
 - CSS 
@@ -28,16 +30,19 @@ https://adityasridhar.com/posts/desktop-apps-with-html-css-javascript#:~:text=El
 
 If images are included, they will not appear in the packaged application. In order to make the images appear,
 - npm i --save electron-compile 
-- Paste the following two lines at the start of the index.js file <br><br>
-import { addBypassChecker } from 'electron-compile'; <br>
-addBypassChecker((filePath) => { return filePath.indexOf(app.getAppPath()) === -1 && (/.jpg/.test(filePath) || /.jfif/.test(filePath) || /.png/.test(filePath)); }) <br><br>
-(This statement is used if jpg, jfif and png image types are used. Replace these with the required image type) <br>
+- Paste the following two lines at the start of the index.js file
+
+
+
+import { addBypassChecker } from 'electron-compile';
+
+
+addBypassChecker((filePath) => { return filePath.indexOf(app.getAppPath()) === -1 && (/.jpg/.test(filePath) || /.jfif/.test(filePath) || /.png/.test(filePath)); })
+
+
+
+(This statement is used if jpg, jfif and png image types are used. Replace these with the required image type)
   
 ## How to run the application on client computer
-a
-b
 
-a
-
-b
 
