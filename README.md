@@ -31,6 +31,7 @@ If images are included, they will not appear in the packaged application. In ord
 - Paste the following two lines at the start of the index.js file 
 import { addBypassChecker } from 'electron-compile'; <br>
 addBypassChecker((filePath) => { return filePath.indexOf(app.getAppPath()) === -1 && (/.jpg/.test(filePath) || /.jfif/.test(filePath) || /.png/.test(filePath)); })
+<br>
  (This statement is used if jpg, jfif and png image types are used. Replace these with the required image type) <br>
   
   
