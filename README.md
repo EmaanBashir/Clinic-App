@@ -34,5 +34,10 @@ addBypassChecker((filePath) => { return filePath.indexOf(app.getAppPath()) === -
 (This statement is used if jpg, jfif and png image types are used. Replace these with the required image type) <br>
   
 ## How to run the application on client computer
+a
+b
 
+a
+
+b
 
